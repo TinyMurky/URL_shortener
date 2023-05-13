@@ -1,0 +1,7 @@
+/node_modules
+/README
+.env
+*.log
+*.gz
+.DS_store
+
