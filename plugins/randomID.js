@@ -25,7 +25,7 @@ export function randomID() {
 }
 
 //此function會檢查原本的url是不是已經被建立
-//如果以備建立回傳原本URL document
+//如果已建立會回傳原本URL document
 //如果沒有則會新增新的URL document，並回傳document的建立內容
 export function createShortURL(origin_URL) {
   return new Promise((resolve, reject) => {

@@ -6,6 +6,7 @@ const shortURLSchema = new mongoose.Schema({
   },
   origin_URL: {
     type: String,
+    //Use Schema Validation make sure URL input is valid
     validate: {
       validator: function (v) {
         return /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/.test(
