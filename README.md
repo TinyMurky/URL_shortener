@@ -50,7 +50,7 @@
 ## 例外處理
 ### 輸入相同網址時，產生一樣的縮址
 1.  /plugins/randomID.js
-    在創立一筆資料前會先於資歷庫尋找是否已存在相同的URL，如果有則直接回傳已存在的Short URL
+    在創立一筆資料前會先於資料庫尋找是否已存在相同的URL，如果有則直接回傳已存在的Short URL
     ```javaScript
     //此function會檢查原本的url是不是已經被建立
     //如果已建立會回傳原本URL document
