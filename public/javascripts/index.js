@@ -14,6 +14,8 @@ function copyShortURL(event) {
 
 const urlForm = document.querySelector("#submit-url-form")
 const urlSubmitBtn = document.querySelector("#submit-btn")
+
+//If form input is invalid, prevent form from sending
 urlForm.addEventListener("submit", (event) => {
   if (!urlForm.checkValidity()) {
     event.preventDefault() //不要submit

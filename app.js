@@ -4,7 +4,6 @@ import exphbs from "express-handlebars"
 import { router as routes } from "./routes/index.js"
 import methodOverride from "method-override"
 import shortURL from "./models/shortURL.js"
-import { renderError } from "./plugins/renderError.js"
 const app = express()
 const PORT = process.env.PORT || 3000
 export const ROOT = process.env.HOST || `localhost:${PORT}`
