@@ -1,24 +1,35 @@
 <div class="container my-5">
-    <form action="/shortURL?_method=PUT" method="POST">
+    <form action="/shortURL?_method=PUT" method="POST" id="submit-url-form" novalidate >
         <div class="input-group mb-3">
-            <input type="url" class="form-control" name="origin_URL" placeholder="Input URL" aria-label="Input URL" aria-describedby="button-addon2">
-            <button class="btn btn-primary" type="submit" id="button-addon2">Create</button>
-            <div class="valid-feedback">Success! You've done it.</div>
-            <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
+            <input type="url" class="form-control" name="origin_URL" placeholder="Input URL" aria-label="Input URL" aria-describedby="button-addon2" required>
+            <button class="btn btn-primary" type="submit" id="submit-btn">Create</button>
+            <div class="invalid-feedback">Sorry, We need an URL. Need to begin with http</div>
         </div>
     </form>
     {{#if renderURLConfig}}
-    <div>
-      <div class="alert alert-info" role="alert">
-          <p><span class="mr-2">{{renderURLConfig.origin_URL}}: </span> <code>{{renderURLConfig.newURL}}</code></p>
-      </div>
-    </div>
+        <table class="table table-hover">
+          <thead>
+            <tr class="table-primary">
+              <th scope="col">Original URL</th>
+              <th scope="col">Short URL</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-light">
+                <th scope="row">{{renderURLConfig.origin_URL}}</th>
+                <td>{{renderURLConfig.newURL}}</td>
+                <td><button type="button" class="copy-btn btn btn-outline-primary">Copy</button></td>
+            </tr>
+          </tbody>
+        </table>
     {{/if}}
     {{#if errorMessage}}
     <div>
-      <div class="alert alert-info" role="alert">
+      <div class="alert alert-dismissible alert-primary" role="alert">
           <p><code>{{errorMessage}}</code></p>
       </div>
     </div>
     {{/if}}
 </div>
+<script src="{{script}}"></script>
