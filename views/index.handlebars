@@ -1,5 +1,5 @@
 <div class="container my-5">
-    <form action="/shortURL?_method=PUT" method="POST" id="submit-url-form" novalidate >
+    <form action="/shortURLs?_method=PUT" method="POST" id="submit-url-form" novalidate >
         <div class="input-group mb-3">
             <!--Use required to ensure No empty data input-->
             <!--type="url" to make sure input is indeed URL-->
@@ -22,7 +22,12 @@
             <tr class="table-light">
                 <th scope="row">{{this.origin_URL}}</th>
                 <td>{{../rootURL}}/{{this._id}}</td>
-                <td><button type="button" class="copy-btn btn btn-outline-primary">Copy</button></td>
+                <td class="d-flex justify-content-end">
+                    <button type="button" class="copy-btn btn btn-outline-primary me-1">Copy</button>
+                    <form action="/shortURLs/{{this._id}}?_method=DELETE" method="POST">
+                        <button type="submit" class="delete-btn btn btn-outline-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
           </tbody>
           {{/each}}

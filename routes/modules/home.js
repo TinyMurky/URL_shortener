@@ -26,25 +26,6 @@ router.get("/", (req, res) => {
       renderError(res, setting, error)
     })
 })
-router.put("/shortURL", (req, res) => {
-  const origin_URL = req.body.origin_URL.trim()
-  if (origin_URL) {
-    createShortURL(origin_URL)
-      .then((renderURLConfig) => {
-        res.redirect("/")
-      })
-      .catch((error) => {
-        renderError(res, setting, error)
-      })
-  } else {
-    try {
-      res.redirect("/")
-    } catch (error) {
-      renderError(res, setting, error)
-    }
-  }
-})
-
 router.get("/:id", (req, res) => {
   const shortUrlID = req.params.id
   shortURL.findById(shortUrlID).then((redirectUrl) => {
@@ -60,4 +41,5 @@ router.get("/:id", (req, res) => {
     }
   })
 })
+
 export { router }
