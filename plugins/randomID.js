@@ -1,5 +1,4 @@
 import { customAlphabet } from "nanoid"
-//import { db } from "../configs/mongoose.js"
 import shortURL from "../models/shortURL.js"
 const alphabet =
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -20,26 +19,6 @@ export async function randomID() {
     throw Error(error)
   }
 }
-async function doStuffWithUser() {
-  // Await the promise returned from calling getUser.
-  const user = await randomID().catch()
-  console.log(user) // Prints '{name: 'bill', admin: false}'
-}
-/*
-db.on("open", () => {
-  console.log("start create")
-  shortURL
-    .create(
-      alphabet
-        .split("")
-        .slice(0, -1)
-        .map((item) => ({ _id: item }))
-    )
-    .then(() => {
-      doStuffWithUser()
-    })
-})
-*/
 
 //此function會檢查原本的url是不是已經被建立
 //如果已建立會回傳原本URL document
@@ -63,6 +42,3 @@ export async function createShortURL(origin_URL) {
     throw Error(error)
   }
 }
-
-//createShortURL2("a").catch((error) => console.error(error))
-//createShortURL2("z").catch((error) => console.error(error))

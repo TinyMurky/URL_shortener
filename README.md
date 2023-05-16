@@ -51,36 +51,29 @@
 ### 輸入相同網址時，產生一樣的縮址
 1.  /plugins/randomID.js
     在創立一筆資料前會先於資料庫尋找是否已存在相同的URL，如果有則直接回傳已存在的Short URL
+
     ```javaScript
     //此function會檢查原本的url是不是已經被建立
     //如果已建立會回傳原本URL document
     //如果沒有則會新增新的URL document，並回傳document的建立內容
-    export function createShortURL(origin_URL) {
-    return new Promise((resolve, reject) => {
-        resolve(
-        shortURL
-            .find({ origin_URL: origin_URL })
-            .lean()
-            .then((URL) => {
-            if (URL.length) {
-                return URL[0]
+    export async function createShortURL(origin_URL) {
+        try {
+            const urlArray = await shortURL.find({ origin_URL })
+            if (urlArray.length) {
+                urlArray[0].set("updatedAt", new Date())
+                return urlArray[0].save()
             } else {
-                return new Promise((resolve, reject) => {
-                resolve(
-                    randomID().then((newID) => {
-                    const newURLConfig = { _id: newID, origin_URL: origin_URL }
-                    const newShortURL = new shortURL(newURLConfig)
-                    newShortURL.save()
-                    return new Promise((resolve, reject) => {
-                        resolve(newURLConfig)
-                    })
-                    })
-                )
-                })
-            }
-            })
-        )
-    })
+                const newID = await randomID()
+                const newURLConfig = {
+                    _id: newID,
+                    origin_URL: origin_URL,
+                }
+                const newShortURL = new shortURL(newURLConfig)
+                return newShortURL.save()
+                }
+        } catch (error) {
+            throw Error(error)
+        }
     }
     ```
 ### 未輸入內容，防止表單送出
