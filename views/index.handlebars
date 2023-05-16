@@ -9,24 +9,28 @@
         </div>
     </form>
     {{#if allURL}}
-        <table class="table table-hover">
+        <table class="table table-hover align-middle">
           <thead>
             <tr class="table-primary">
-              <th scope="col">Original URL</th>
-              <th scope="col">Short URL</th>
               <th scope="col"></th>
+              <th scope="col" class="th-sm">Original URL</th>
+              <th scope="col" class="th-sm">Short URL</th>
+              <th scope="col" class="th-sm"></th>
             </tr>
           </thead>
           <tbody>
             {{#each allURL}}
             <tr class="table-light">
-                <th scope="row">{{this.origin_URL}}</th>
-                <td>{{../rootURL}}/{{this._id}}</td>
-                <td class="d-flex justify-content-end">
-                    <button type="button" class="copy-btn btn btn-outline-primary me-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Copied!" data-bs-container="true" >Copy</button>
-                    <form action="/shortURLs/{{this._id}}?_method=DELETE" method="POST">
-                        <button type="submit" class="delete-btn btn btn-outline-danger">Delete</button>
-                    </form>
+                <th scope="row">{{#if @index}}{{@index}}{{else}}NEW{{/if}}</th>
+                <td class="text-wrap">{{this.origin_URL}}</td>
+                <td class="text-wrap">{{../rootURL}}/{{this._id}}</td>
+                <td class="text-wrap ">
+                    <div class="container d-flex justify-content-end">
+                        <button type="button" class="copy-btn btn btn-outline-primary me-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Copied!" data-bs-container="true" >Copy</button>
+                        <form action="/shortURLs/{{this._id}}?_method=DELETE" method="POST">
+                            <button type="submit" class="delete-btn btn btn-outline-danger">Delete</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
           </tbody>
