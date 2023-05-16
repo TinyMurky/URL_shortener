@@ -8,7 +8,7 @@
             <div class="invalid-feedback">Sorry, We need an URL. Need to begin with http</div>
         </div>
     </form>
-    {{#if renderURLConfig}}
+    {{#if allURL}}
         <table class="table table-hover">
           <thead>
             <tr class="table-primary">
@@ -18,12 +18,14 @@
             </tr>
           </thead>
           <tbody>
+            {{#each allURL}}
             <tr class="table-light">
-                <th scope="row">{{renderURLConfig.origin_URL}}</th>
-                <td>{{renderURLConfig.newURL}}</td>
+                <th scope="row">{{this.origin_URL}}</th>
+                <td>{{../rootURL}}/{{this._id}}</td>
                 <td><button type="button" class="copy-btn btn btn-outline-primary">Copy</button></td>
             </tr>
           </tbody>
+          {{/each}}
         </table>
     {{/if}}
     {{#if errorMessage}}

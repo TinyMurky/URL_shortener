@@ -6,28 +6,31 @@ import { renderError } from "../../plugins/renderError.js"
 const router = express.Router()
 export const setting = {
   home: {
-    renderURLConfig: null,
+    rootURL: null,
     errorMessage: null,
     script: "/javascripts/index.js",
+    allURL: null,
   },
 }
 router.get("/", (req, res) => {
-  try {
-    res.render("index", setting.home)
-  } catch (error) {
-    renderError(res, setting, error)
-  }
+  setting.home.rootURL = ROOT
+  shortURL
+    .find()
+    .sort({ createdAt: -1 })
+    .lean()
+    .then((urlList) => {
+      setting.home.allURL = urlList
+    })
+    .then(() => res.render("index", setting.home))
+    .catch((error) => {
+      renderError(res, setting, error)
+    })
 })
 router.put("/shortURL", (req, res) => {
   const origin_URL = req.body.origin_URL.trim()
   if (origin_URL) {
     createShortURL(origin_URL)
       .then((renderURLConfig) => {
-        console.log(renderURLConfig)
-        renderURLConfig.newURL = `${ROOT}/${renderURLConfig._id}`
-        setting.home.renderURLConfig = renderURLConfig
-      })
-      .then(() => {
         res.redirect("/")
       })
       .catch((error) => {
@@ -49,11 +52,10 @@ router.get("/:id", (req, res) => {
       if (redirectUrl) {
         res.redirect(redirectUrl.origin_URL)
       } else {
-        setting.home.renderURLConfig = null
-        setting.home.errorMessage = "Sorry the short url might be missing"
         res.redirect("/")
       }
     } catch (error) {
+      setting.home.errorMessage = error
       renderError(res, setting, error)
     }
   })
