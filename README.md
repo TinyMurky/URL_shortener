@@ -125,7 +125,7 @@
 - Node.js 18.16.0
 - Express 4.18.2
 - Express-Handlebars 7.0.7
-- Bootstrap 5.2.3
+- Bootstrap 5.3.0
 - dotenv 16.0.3,
 - method-override 3.0.0,
 - mongoose 7.1.1,

@@ -23,7 +23,7 @@
                 <th scope="row">{{this.origin_URL}}</th>
                 <td>{{../rootURL}}/{{this._id}}</td>
                 <td class="d-flex justify-content-end">
-                    <button type="button" class="copy-btn btn btn-outline-primary me-1">Copy</button>
+                    <button type="button" class="copy-btn btn btn-outline-primary me-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Copied!" data-bs-container="true" >Copy</button>
                     <form action="/shortURLs/{{this._id}}?_method=DELETE" method="POST">
                         <button type="submit" class="delete-btn btn btn-outline-danger">Delete</button>
                     </form>
@@ -41,4 +41,3 @@
     </div>
     {{/if}}
 </div>
-<script src="{{script}}"></script>

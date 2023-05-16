@@ -19,6 +19,7 @@ const shortURLSchema = new mongoose.Schema(
       required: [true, "Original URL is missing"],
     },
   },
+
   { timestamps: true }
 )
 

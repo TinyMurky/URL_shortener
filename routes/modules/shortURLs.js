@@ -12,7 +12,8 @@ router.put("/", (req, res) => {
   if (origin_URL) {
     createShortURL(origin_URL)
       .then((renderURLConfig) => {
-        res.redirect("/home")
+        setting.home.errorMessage = null
+        res.redirect("/")
       })
       .catch((error) => {
         renderError(res, setting, error)
@@ -39,10 +40,9 @@ router.delete("/:id", (req, res) => {
     })
     .then(() => {
       setting.home.errorMessage = null
-      res.redirect("/home")
+      res.redirect("/")
     })
     .catch((error) => {
-      setting.home.errorMessage = error
       renderError(res, setting, error)
     })
 })

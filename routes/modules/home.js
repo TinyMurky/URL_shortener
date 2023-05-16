@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
   setting.home.rootURL = ROOT
   shortURL
     .find()
-    .sort({ createdAt: -1 })
+    .sort({ updatedAt: -1 })
     .lean()
     .then((urlList) => {
       setting.home.allURL = urlList
@@ -36,7 +36,6 @@ router.get("/:id", (req, res) => {
         res.redirect("/")
       }
     } catch (error) {
-      setting.home.errorMessage = error
       renderError(res, setting, error)
     }
   })
