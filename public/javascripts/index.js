@@ -5,7 +5,8 @@ allCopyBut.forEach((copyButton) => {
 function copyShortURL(event) {
   if (event.target.matches(".copy-btn")) {
     const shortURL =
-      event.target.parentElement.previousElementSibling.textContent
+      event.target.parentElement.parentElement.previousElementSibling
+        .textContent
 
     // Copy the text inside the text field
     navigator.clipboard.writeText(shortURL)
