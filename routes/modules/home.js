@@ -9,18 +9,21 @@ export const globalSetting = {
   script: "/javascripts/index.js",
 }
 
-const home = { ...globalSetting, ...{ allURL: null, errorMessage: null } }
+const homeSetting = {
+  ...globalSetting,
+  ...{ allURL: null, errorMessage: null },
+}
 router.get("/", (req, res) => {
   shortURL
     .find()
     .sort({ updatedAt: -1 })
     .lean()
     .then((urlList) => {
-      home.allURL = urlList
+      homeSetting.allURL = urlList
     })
-    .then(() => res.render("index", home))
+    .then(() => res.render("index", homeSetting))
     .catch((error) => {
-      renderError(res, home, error)
+      renderError(res, homeSetting, error)
     })
 })
 router.get("/:id", (req, res) => {
@@ -33,7 +36,7 @@ router.get("/:id", (req, res) => {
         res.redirect("/")
       }
     } catch (error) {
-      renderError(res, home, error)
+      renderError(res, homeSetting, error)
     }
   })
 })
