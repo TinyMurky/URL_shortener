@@ -1,28 +1,31 @@
 import express from "express"
 import shortURL from "../../models/shortURL.js"
 import { randomID, createShortURL } from "../../plugins/randomID.js"
-import { ROOT } from "../../app.js"
 import { renderError } from "../../plugins/renderError.js"
 const router = express.Router()
-import { router as home, setting } from "./home.js"
+import { globalSetting } from "./home.js"
 
-router.use("/home", home)
+const shortURLSetting = {
+  ...globalSetting,
+  errorMessage: null,
+}
+//router.use("/home", home)
 router.put("/", (req, res) => {
   const origin_URL = req.body.origin_URL.trim()
   if (origin_URL) {
     createShortURL(origin_URL)
       .then((renderURLConfig) => {
-        setting.home.errorMessage = null
+        shortURLSetting.errorMessage = null
         res.redirect("/")
       })
       .catch((error) => {
-        renderError(res, setting, error)
+        renderError(res, shortURLSetting, error)
       })
   } else {
     try {
       res.redirect("/")
     } catch (error) {
-      renderError(res, setting, error)
+      renderError(res, shortURLSetting, error)
     }
   }
 })
@@ -39,11 +42,11 @@ router.delete("/:id", (req, res) => {
       }
     })
     .then(() => {
-      setting.home.errorMessage = null
+      shortURLSetting.errorMessage = null
       res.redirect("/")
     })
     .catch((error) => {
-      renderError(res, setting, error)
+      renderError(res, shortURLSetting, error)
     })
 })
 export { router }

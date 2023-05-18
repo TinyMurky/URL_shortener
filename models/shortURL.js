@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-const shortURLSchema = new mongoose.Schema(
+const ShortURLSchema = new mongoose.Schema(
   {
     _id: {
       type: String,
@@ -24,4 +24,4 @@ const shortURLSchema = new mongoose.Schema(
 )
 
 export default mongoose.models?.ShortURL ||
-  mongoose.model("ShortURL", shortURLSchema)
+  mongoose.model("ShortURL", ShortURLSchema)

@@ -1,29 +1,26 @@
 import express from "express"
 import shortURL from "../../models/shortURL.js"
 import { randomID, createShortURL } from "../../plugins/randomID.js"
-import { ROOT } from "../../app.js"
 import { renderError } from "../../plugins/renderError.js"
 const router = express.Router()
-export const setting = {
-  home: {
-    rootURL: null,
-    errorMessage: null,
-    script: "/javascripts/index.js",
-    allURL: null,
-  },
+const rootPORT = process.env.PORT || 3000
+export const globalSetting = {
+  rootURL: process.env.HOST || `localhost:${rootPORT}`,
+  script: "/javascripts/index.js",
 }
+
+const home = { ...globalSetting, ...{ allURL: null, errorMessage: null } }
 router.get("/", (req, res) => {
-  setting.home.rootURL = ROOT
   shortURL
     .find()
     .sort({ updatedAt: -1 })
     .lean()
     .then((urlList) => {
-      setting.home.allURL = urlList
+      home.allURL = urlList
     })
-    .then(() => res.render("index", setting.home))
+    .then(() => res.render("index", home))
     .catch((error) => {
-      renderError(res, setting, error)
+      renderError(res, home, error)
     })
 })
 router.get("/:id", (req, res) => {
@@ -36,7 +33,7 @@ router.get("/:id", (req, res) => {
         res.redirect("/")
       }
     } catch (error) {
-      renderError(res, setting, error)
+      renderError(res, home, error)
     }
   })
 })

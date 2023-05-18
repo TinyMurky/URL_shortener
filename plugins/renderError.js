@@ -1,6 +1,5 @@
 export function renderError(res, setting, error) {
-  setting.home.errorMessage = error.message
-  //res.render("index", setting.home)
-  res.redirect("/")
+  setting.errorMessage = error.message
+  res.render("index", setting)
   console.log(error.message)
 }

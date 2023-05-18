@@ -6,7 +6,7 @@ import methodOverride from "method-override"
 import shortURL from "./models/shortURL.js"
 const app = express()
 const PORT = process.env.PORT || 3000
-export const ROOT = process.env.HOST || `localhost:${PORT}`
+const ROOT = process.env.HOST || `localhost:${PORT}`
 
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
