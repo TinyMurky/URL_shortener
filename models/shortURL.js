@@ -10,7 +10,7 @@ const ShortURLSchema = new mongoose.Schema(
       //Use Schema Validation make sure URL input is valid
       validate: {
         validator: function (v) {
-          return /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/.test(
+          return /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]+))?/.test(
             v
           )
         },
