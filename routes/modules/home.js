@@ -9,11 +9,11 @@ export const globalSetting = {
   script: "/javascripts/index.js",
 }
 
-const homeSetting = {
-  ...globalSetting,
-  ...{ allURL: null, errorMessage: null },
-}
 router.get("/", (req, res) => {
+  const homeSetting = {
+    ...globalSetting,
+    ...{ allURL: null, errorMessage: null },
+  }
   shortURL
     .find()
     .sort({ updatedAt: -1 })
@@ -36,7 +36,7 @@ router.get("/:id", (req, res) => {
         res.redirect("/")
       }
     } catch (error) {
-      renderError(res, homeSetting, error)
+      renderError(res, globalSetting, error)
     }
   })
 })

@@ -5,12 +5,12 @@ import { renderError } from "../../plugins/renderError.js"
 const router = express.Router()
 import { globalSetting } from "./home.js"
 
-const shortURLSetting = {
-  ...globalSetting,
-  errorMessage: null,
-}
 //router.use("/home", home)
 router.put("/", (req, res) => {
+  const shortURLSetting = {
+    ...globalSetting,
+    errorMessage: null,
+  }
   const origin_URL = req.body.origin_URL.trim()
   if (origin_URL) {
     createShortURL(origin_URL)
@@ -31,6 +31,10 @@ router.put("/", (req, res) => {
 })
 
 router.delete("/:id", (req, res) => {
+  const shortURLSetting = {
+    ...globalSetting,
+    errorMessage: null,
+  }
   const shortUrlID = req.params.id
   return shortURL
     .findById(shortUrlID)
