@@ -1,6 +1,7 @@
 # Readme
 ![](./README/demo.png)
-
+## 簡介
+此專案由Node.js開發，建立可將原始網址轉成HOST_NAME+五碼英數組合之網址，於瀏覽器輸入短網址可以直接連線至原始網址。
 ## Installing - 專案安裝流程
 
 1. 請先確認有安裝 node.js 與 npm
